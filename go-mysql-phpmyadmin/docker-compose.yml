@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: erica-mysql
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ericapassword
+      MYSQL_DATABASE: erica
+      MYSQL_USER: erica
+      MYSQL_PASSWORD: erica
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: erica-phpmyadmin
+    ports:
+      - "8080:80"
+    links:
+      - db
+    environment:
+      MYSQL_USERNAME: erica
+      MYSQL_PASSWORD: erica
+      MYSQL_ROOT_PASSOWRD: erica
+
+volumes:
+  db_data:
